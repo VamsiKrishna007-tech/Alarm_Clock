@@ -50,17 +50,6 @@ begin
  end
 end
 
-
-
-
-// Function used to take Modules of a number
-function [3:0] Mod_10;
-input [5:0] number;
-begin
- Mod_10 = (number>=50)? 5: ((number>=40)? 4: ((number>=30)? 3 :((number>=20)? 2 :(number>=10)? 1 :0))));
-end
-endfunction
-
 //Setting and Disabling Alarm:
 // if clock time and alarm time are same & if alarm is turned on then alarm rings untill it is stopped.
 always @(posedge clock)
@@ -72,22 +61,21 @@ else
   if ({a_hour1,a_hour0,a_minute1,a_minute0,a_second1,a_second0} == {c_hour1,c_hour0,c_minute1,c_minute0,c_second1,c_second0})
    begin
     if(Alarm_ON == 1)
-	 Alarm = 1;
-	else if(STOP_alarm == 1)
-	 Alarm = 0;
+         Alarm = 1;
+        else if(STOP_alarm == 1)
+         Alarm = 0;
    end
  end
 end
 
 
-
-
-always @(posedge clock or posedge reset)  // Asynchronous Reset
+// Function used to take Modules of a number( will be used while displaying clock time)
+function [3:0] Mod_10;
+input [5:0] number;
 begin
- if (reset)
-  begin
-    
-    temp_hour <= H_in1*10 + H_in0;
-	temp_minute <= M_in1*10 + M_in0;
-	temp_second <= 0;
+ Mod_10 = (number>=50)? 5: ((number>=40)? 4: ((number>=30)? 3 :((number>=20)? 2 :(number>=10)? 1 :0))));
+end
+endfunction
+
+
 	
