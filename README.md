@@ -117,21 +117,37 @@ Alarm cleared.
 
 ------------------------------------------
 input clock,
+
 input reset,
+
 input [1:0] H_in1,        // Input used to set MSB of Hour digit of the clock
+
 input [2:0] H_in0,        // Input used to set LSB of Hour digit of the clock
+
 input [3:0] M_in1,        // Input used to set MSB of Minute digit of the clock
+
 input [3:0] M_in0,        // Input used to set LSB of Minute digit of the clock
+
 input LD_time,            // If LD_time=1, clock time is set to input time
                           // If LD_time=0, clock time acts normally by incrementing every 10sec
+
 input LD_alarm,           // If LD_alarm=1, alarm time is set to input time 
                           // If LD_alarm=0, alarm time acts normally
+
 input STOP_alarm,         // If STOP_alarm is high, then it will bring Alarm_ON to low
+
 input Alarm_ON,           // If alarm time is equal to current time, Alarm_ON is high then alarm will ring
-output reg Alarm,             // Alarm goes high if Alarm_ON is high and remains high untill STOP_alarm is high                   
+
+output reg Alarm,             // Alarm goes high if Alarm_ON is high and remains high untill STOP_alarm is high        
+           
 output [1:0] H_out1,      // Output used to represent MSB of Hour digit of the clock
+
 output [2:0] H_out0,      // Output used to represent LSB of Hour digit of the clock
+
 output [3:0] M_out1,      // Output used to represent MSB of Minute digit of the clock
+
 output [3:0] M_out0,      // Output used to represent LSB of Minute digit of the clock
+
 output [3:0] S_out1,      // Output used to represent MSB of Seconds digit of the clock
+
 output [3:0] S_out0       // Output used to represent LSB of Seconds digit of the clock
