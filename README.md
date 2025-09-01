@@ -1,7 +1,3 @@
-Digital Alarm Clock — Project Documentation (step-by-step, beginner-friendly)
-
-Below is a neat, practical document that explains this Verilog alarm-clock project clearly — the way you asked: step-by-step, with simple analogies and small examples (like the mod10 case). Use it as a README, report, or teaching note.
-
 Overview
 
 What it does (brief): a 24-hour digital clock (HH:MM:SS) with an alarm.
@@ -24,7 +20,6 @@ Comparator & Alarm control — raises and clears the alarm.
 
 BCD digit extraction for display (tens/ones).
 
-Analogy: think of the design like a small watch: a metronome (clock divider) → seconds/minutes/hours counters → a guard (comparator) who sounds an alarm when the time matches.
 
 Signals (API)
 
@@ -54,7 +49,6 @@ M_out1, M_out0 — minute digits.
 
 S_out1, S_out0 — second digits.
 
-(You can choose bit widths for digits; below examples use safe widths, e.g., 4 bits for ones digits.)
 
 1 — Clock Divider (make 1-second ticks)
 
@@ -70,27 +64,29 @@ For a 50 MHz input: 50,000,000 cycles = 1 second. So toggle every 25,000,000 cyc
 
 Half period = 50,000,000 / 2 = 25,000,000.
 
+
 2 — Time Counters (HH:MM:SS)
 
 Goal: keep tmp_second, tmp_minute, tmp_hour updated every second (driven by clk_1s).
 
 Storage sizes
 
-Seconds: 0..59 → need at least 6 bits (reg [5:0] seconds).
+Seconds: 0..59
 
-Minutes: 0..59 → reg [5:0] minutes.
+Minutes: 0..59
 
-Hours: 0..23 → reg [4:0] hours.
+Hours: 0..23
 
-Behavior (on clk_1s)
 
 If LD_time is asserted → set hours, minutes from inputs; seconds = 0.
 
 Else increment seconds. If seconds == 59 → seconds=0, increment minutes. If minutes==59 → minutes=0, increment hours. If hours==23 → hours=0.
 
+
 3 — Digit Extraction (MOD-10 / tens and ones)
 
 Goal: split seconds/minutes/hours numeric counters into digits for display: tens (most significant) and ones (least significant).
+
 
 4 — Alarm Registers & Loading
 
@@ -104,6 +100,7 @@ On LD_alarm: set alarm_hour = H_in1*10 + H_in0, alarm_minute = M_in1*10 + M_in0,
 5 — Alarm Comparator & Control
 
 Goal: when current_time == alarm_time and AL_ON==1 → set Alarm = 1. Keep it high until STOP_al or reset.
+
 
 
 6 — Reset Behavior
